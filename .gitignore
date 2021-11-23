@@ -1,0 +1,17 @@
+.vs
+
+build
+
+Debug
+
+x64
+
+*.make
+
+*.vcxproj
+
+*.sln
+
+*.user
+
+*.vcxproj.*

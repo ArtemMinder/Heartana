@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/download.ico</file>
+        <file>images/team.ico</file>
+        <file>images/reZero.ico</file>
+        <file>images/сhanges.ico</file>
+        <file>images/logo.png</file>
+        <file>images/add.ico</file>
+        <file>images/cancel.ico</file>
+        <file>images/ok.ico</file>
+        <file>images/connect.ico</file>
+        <file>images/succes.ico</file>
+        <file>images/download1.ico</file>
+        <file>images/badConnect.ico</file>
+        <file>images/retry.ico</file>
+        <file>images/download2.ico</file>
+        <file>images/success.ico</file>
+        <file>images/dayteDeneg.ico</file>
+        <file>images/sd card.ico</file>
+        <file>images/sd card.png</file>
+    </qresource>
+</RCC>

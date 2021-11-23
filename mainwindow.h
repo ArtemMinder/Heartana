@@ -21,6 +21,7 @@ public:
     void startGraphicPreset();
     void setNorm(QString newYear);
     void setGraphicIntro();
+    void overlays(bool const& pulse, bool const& breath, bool const& position, bool const& pulseNorm, bool const& breathNorm, bool const& legend);
     double breathDiviation(int const& low, int const& high, QVector <double> newBreath);
     double pulseDiviation(int const& low, int const& high, QVector <double> newPulse);
     ~MainWindow();

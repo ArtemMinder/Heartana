@@ -9,6 +9,7 @@
 #include "logic.h"
 #include "patient.h"
 #include "qcustomplot.h"
+#include <QStyleFactory>
 
 QT_CHARTS_USE_NAMESPACE
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow){
@@ -261,10 +262,10 @@ void MainWindow::setGraphicIntro(){
     highBreathNorm->setData(time, highBreath);
     lowPulseNorm->setData(time, lowPulse);
     highPulseNorm->setData(time, highPulse);
-    customPlot->addPlottable(highBreathNorm);
-    highBreathNorm->setName("Отклонение от нормы дыхания - 0%");
-    customPlot->addPlottable(highPulseNorm);
-    highPulseNorm->setName("Отклонение от нормы пульса - 0%");
+   // customPlot->addPlottable(highBreathNorm);
+   // highBreathNorm->setName("Отклонение от нормы дыхания - 0%");
+   // customPlot->addPlottable(highPulseNorm);
+   // highPulseNorm->setName("Отклонение от нормы пульса - 0%");
     customPlot->legend->setVisible(true);
     customPlot->rescaleAxes();
     customPlot->replot();
@@ -410,12 +411,12 @@ void MainWindow::on_downloadButton_clicked()
         highBreathNorm->setData(openTime, highBreath);
         lowPulseNorm->setData(openTime, lowPulse);
         highPulseNorm->setData(openTime, highPulse);
-        customPlot->addPlottable(highBreathNorm);
+       // customPlot->addPlottable(highBreathNorm);
         QString brd = QString::number(breathDiviation(lowBr,highBr, openBreath));
         QString pld = QString::number(breathDiviation(lowPl,highPl, openPulse));
-        highBreathNorm->setName("Отклонение от нормы дыхания - " + brd + "%");
-        customPlot->addPlottable(highPulseNorm);
-        highPulseNorm->setName("Отклонение от нормы пульса - " + pld + "%");
+      //  highBreathNorm->setName("Отклонение от нормы дыхания - " + brd + "%");
+      //  customPlot->addPlottable(highPulseNorm);
+      //  highPulseNorm->setName("Отклонение от нормы пульса - " + pld + "%");
         customPlot->legend->setVisible(true);
         customPlot->rescaleAxes();
         customPlot->replot();
@@ -446,7 +447,11 @@ void MainWindow::on_reZeroButton_clicked()
 
 void MainWindow::on_settingButton_clicked()
 {
-    settings->show();
+    Settings setting;
+        setting.exec();
+        setting.getPulseOverlay();
+        overlays(setting.getPulseOverlay(), setting.getBreathOverlay(), setting.getPositionOverlay(),
+                 setting.getPulseNormOverlay(), setting.getBreathNormOverlay(), setting.getLegendOverlay());
 }
 
 void MainWindow::on_SDButton_clicked(){
@@ -531,4 +536,35 @@ double MainWindow::pulseDiviation(int const& low, int const& high, QVector <doub
     }
      double pulseDiviationPercent  = (count*100)/newPulse.size();
      return pulseDiviationPercent;
+}
+
+void MainWindow::overlays(bool const& pulse, bool const& breath, bool const& position,
+                          bool const& pulseNorm, bool const& breathNorm, bool const& legend){
+    if(pulse == true){graphic->setLineStyle(QCPGraph::lsLine);
+    } else {graphic->setLineStyle(QCPGraph::lsNone);}
+    if(breath == true){graphic_breath->setLineStyle(QCPGraph::lsLine);
+    } else {graphic_breath->setLineStyle(QCPGraph::lsNone);}
+    if(position == true){graphic_up->setLineStyle(QCPGraph::lsLine);
+        graphic_down->setLineStyle(QCPGraph::lsLine);
+        graphic_right->setLineStyle(QCPGraph::lsLine);
+        graphic_left->setLineStyle(QCPGraph::lsLine);
+        graphic_sit->setLineStyle(QCPGraph::lsLine);
+        graphic_bat->setLineStyle(QCPGraph::lsLine);
+    } else { graphic_up->setLineStyle(QCPGraph::lsNone);
+        graphic_down->setLineStyle(QCPGraph::lsNone);
+        graphic_right->setLineStyle(QCPGraph::lsNone);
+        graphic_left->setLineStyle(QCPGraph::lsNone);
+        graphic_sit->setLineStyle(QCPGraph::lsNone);
+        graphic_bat->setLineStyle(QCPGraph::lsNone);}
+    if(pulseNorm == true){lowPulseNorm->setLineStyle(QCPGraph::lsLine);
+        highPulseNorm->setLineStyle(QCPGraph::lsLine);
+    } else {lowPulseNorm->setLineStyle(QCPGraph::lsNone);
+        highPulseNorm->setLineStyle(QCPGraph::lsNone);}
+    if(breathNorm == true){lowBreathNorm->setLineStyle(QCPGraph::lsLine);
+        highBreathNorm->setLineStyle(QCPGraph::lsLine);
+    } else {lowBreathNorm->setLineStyle(QCPGraph::lsNone);
+        highBreathNorm->setLineStyle(QCPGraph::lsNone);}
+    if(legend == true){customPlot->legend->setVisible(true);;
+    } else {customPlot->legend->setVisible(false);}
+    customPlot->replot();
 }

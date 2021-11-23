@@ -39,7 +39,7 @@ void registration::on_confirmButton_clicked()
     ui->mButton_3->isChecked() == false && ui->fButton->isChecked() == false)
     {
         QMessageBox msgBox;
-        msgBox.setText("Необходимые данные отсутствуют");
+        msgBox.setText("Необходимые данные отсутствуют или не корректны");
         msgBox.exec();
     } else {
     logic->savePatient(patient);

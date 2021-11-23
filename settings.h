@@ -1,18 +1,25 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class Settings;
 }
 
-class Settings : public QWidget
+class Settings : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit Settings(QWidget *parent = nullptr);
+    explicit Settings(QDialog *parent = nullptr);
+    bool getPulseOverlay();
+    bool getBreathOverlay();
+    bool getPositionOverlay();
+    bool getPulseNormOverlay();
+    bool getBreathNormOverlay();
+    bool getLegendOverlay();
+    void setTheme();
     ~Settings();
 
 private slots:

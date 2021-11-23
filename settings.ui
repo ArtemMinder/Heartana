@@ -794,9 +794,17 @@ color: rgb(0, 0, 0);
     <rect>
      <x>202</x>
      <y>177</y>
-     <width>91</width>
+     <width>101</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="currentText">
+    <string/>
    </property>
   </widget>
  </widget>
